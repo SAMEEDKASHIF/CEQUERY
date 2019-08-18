@@ -1,0 +1,54 @@
+table#holder {
+    border: 5px dashed black;
+    width:400px;
+	height:100px;
+	margin-left:250px;
+	margin-top:100px;
+    font-family: Verdana, serif;
+}
+table#holder tr:first-child {
+    height:50px;
+    text-align:center;
+}
+table#holder tr:last-child {
+   height:100px;
+   line-height: 50px;
+   margin-left:10px;
+   text-align:center;
+}
+table#holder li img {
+    height: 30px;
+	text-align:center;
+}
+
+ul {
+  list-style: none;
+}
+
+a.button{
+  background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	margin-left: 385px;
+	margin-top: 20px;
+
+  -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+
+}
+a.button:hover{
+  background: #149174;
+	color: #0C5645;
+}
+a.button:active{
+  border:0;
+}
