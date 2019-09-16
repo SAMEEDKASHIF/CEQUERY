@@ -1,14 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
+{%  extends 'layout.html' %}
+{% block title %}{{ title }}{% endblock title %}
 
-<head>
-    <!-- Required meta tags-->
+{% block declareVarFromServer %}
+      <script type="text/javascript">
+        var overall = {{ overall | tojson }}
+        var assessment = {{ assessment | tojson }}
+        var course = {{ course | tojson }}
+        var staff = {{ staff | tojson }}
+        var outcomes = {{ outcomes | tojson }}
+        var support = {{ support | tojson }}
+     </script>
+{% endblock declareVarFromServer %}
 
-    <!-- Title Page-->
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h3> This is the results page </h3>
-</body>
+{%  block PageMenu %}
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <h3>{{ app_name }}</h3>
+            </div>
+           <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
 
-</html>
+                        <li>
+                            <a href= {{ url_for('upload_file') }}>
+                                <i class="fas fa-copy"></i>Upload New File {{ res }}</a>
+                        </li>
+                        <li>
+                            <a href='#' onclick='displayGraphs(overall);'>
+                                <i class="fas fa-chart-bar"></i>Domains</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Sub-Domains</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="#" onclick='displayGraphs(assessment);'>Assessment</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick='displayGraphs(course);'>Course</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick='displayGraphs(outcomes);'>Outcomes</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick='displayGraphs(staff);'>Staff</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick='displayGraphs(support);'>Support</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+{% endblock PageMenu %}
+{% block PageHeading %}
+    <h2>Results</h2>
+{% endblock PageHeading %}
+{% block PageContent %}
+            <!-- MAIN CONTENT-->
+                <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                        <h3 id="chart-title"></h3>
+                                        <canvas id="barChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+
+                         <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner">
+                                        <canvas id="doughnutChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+        <script type = "text/javascript">
+            displayGraphs(overall)
+        </script>
+
+{% endblock PageContent %}
+
