@@ -1,0 +1,5 @@
+1.step: go the this link and download the stanford CoreNLP files (https://stanfordnlp.github.io/CoreNLP/).
+2.step: when the downloading is complete unzip it in any folder for further access.
+3.step: when you have extracted the folder go the folder directory which is like this (C:\Users\Azim\Desktop\project delivery\stanford-corenlp-full-2018-10-05)
+4.step: copy this directory link and start command prompt type cd for changing the directory and paste this link.
+5.step: as you are now inside the directory now copy this command to start the server (java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000)
