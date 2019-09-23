@@ -85,6 +85,7 @@ res = nlp.annotate(strg,
 #print("-----------------------------------------------------------------------------------------------------------------")
 #"(ROOT (S (SBAR (IN Though) (S (NP (PRP he)) (VP (VBD was) (ADJP (RB very) (JJ rich))))) (, ,) (NP (PRP he)) (VP (VBD was) (ADVP (RB still)) (ADJP (RB very) (JJ unhappy))) (. .)))"
 
+finalsentences = []
 from nltk import Tree
 for i in range(len(res["sentences"])):
     parse_str = res["sentences"][i]["parse"]
@@ -108,42 +109,43 @@ for i in range(len(res["sentences"])):
             if(count == 1):
                 count = 0
             else:
-                print(presubtexts[0])
-                print(k)
-      #print(presubtexts[0])
+                finalsentences.append(presubtexts[0])
+                finalsentences.append(k)
+                #print(presubtexts[0])
+                #print(k)
+      #print
 
+df = pd.DataFrame(data=finalsentences)
+print(df)
     #for i in reversed(range(len(subtexts)-1)):
     #    sub = subtexts[i]
     #subtexts[i] = subtexts[i][0:subtexts[i].index(subtexts[i+1])]
-
     #leftover = presubtexts[0][presubtexts[0].index(presubtexts[1])+len(presubtexts[1]):]
     #print(leftover)
 
     #print(l)
-
-    # from textblob import TextBlob
+from textblob import TextBlob
     # !pip install stanfordnlp
     # !pip install textblob vadersentiment
     # from vadersentiment.vadersentiment import SentimentIntensityAnalyzer
     # print(fullStr)
-    # sentence_analysis=[]
-    # for row in stemmed_sentences:
-    #  analysis = TextBlob(row)
-    #  sentence_with_sentiment=[row,analysis.sentiment]
-    #  sentence_analysis.append(sentence_with_sentiment)
+sentence_analysis=[]
+for row in finalsentences:
+    #print(row)
+    analysis = TextBlob(row)
+    sentence_with_sentiment=[row,analysis.sentiment]
+    sentence_analysis.append(sentence_with_sentiment)
 
-    # print(sentence_analysis)
-
-    # pos_count = 0
-    # pos_positive = 0
-    # pos_negative = 0
-    # for row in sentence_analysis:
-    #   pos_count +=1
-    #   if row[1].polarity > 0.5:
-    #      pos_positive += 1
-    #
-    #   if row[1].polarity < 0.5:
-    #      pos_negative+=1
-    # print(pos_count)
-    # print(pos_positive)
-    # print(pos_negative)
+#print(sentence_analysis)
+pos_count = 0
+pos_positive = 0
+pos_negative = 0
+for rows in sentence_analysis:
+    pos_count +=1
+    if rows[1].polarity >= 0.5:
+        pos_positive+=1
+    if rows[1].polarity < 0.5:
+        pos_negative+=1
+print("Sentences",pos_count)
+print("Positive sentences",pos_positive)
+print("Negative sentences",pos_negative)
